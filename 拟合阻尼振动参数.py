@@ -9,11 +9,7 @@ plt.rcParams['font.family'] = 'Times New Roman'
 def damping_vibration(t, A, alpha, omega, phi):
     return A * np.exp(-alpha * t) * np.cos(omega * t + phi)
 
-# Sample data
 
-# t_data = np.array([0, 1, 2, 3, 4, 5])  # Time points
-    
-# f_data = np.array([5.5, 4.3, 3.2, 2.1, 1.0, 0.5])  # Corresponding function values
 
 #t_data = np.transpose(data)
 data = np.load('data1.npy')
@@ -23,8 +19,17 @@ t_data = data[:,0] # Time points
     
 f_data = data[:,1]  # Corresponding function values
 
+# data processing
+for i in range(len(f_data)):
+    if np.isnan(f_data[i]):
+        t_data[i] = 0
+        f_data[i] = f_data[0]
+
+
+
+
 # Fit the data using curve_fit
-initial_guess = (1.0, 0.1, 1.0, 0)  # Initial guess for parameters (A, alpha, omega, phi)
+initial_guess = (1.0, 0.05, 0.1, 0)  # Initial guess for parameters (A, alpha, omega, phi)
 params, covariance = curve_fit(damping_vibration, t_data, f_data, p0=initial_guess)
 
 # Fitted parameter values

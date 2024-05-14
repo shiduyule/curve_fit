@@ -28,13 +28,14 @@ for i in range(len(f_data)):
         
 
 
+
 # Fit the data using curve_fit
 initial_guess = (1.0, 0.05, 0.1, 0)  # Initial guess for parameters (A, alpha, omega, phi)
 params, covariance = curve_fit(damping_vibration, t_data, f_data, p0=initial_guess)
 
 # Fitted parameter values
-A_fit, alpha_fit, omega_fit, phi_fit = params
-print(f"Fitted parameters: A={A_fit}, alpha={alpha_fit}, omega={omega_fit}, phi={phi_fit}")
+A_fit, alpha_fit, omega_fit, phi_fit = params   
+print(f"Fitted parameters: A={A_fit}, alpha={alpha_fit}, omega={omega_fit}, phi={phi_fit}"  )
 
 # 计算阻尼比
 omega_n = omega_fit  # 自然频率即为拟合得到的频率
@@ -64,4 +65,4 @@ plt.legend()
 
 # Save the image with tight bounding box
 plt.savefig('damping_vibration_fit.png', dpi=300, bbox_inches='tight')
-plt.show()
+plt.show()  
